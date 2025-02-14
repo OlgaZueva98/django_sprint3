@@ -3,6 +3,9 @@ from blog.models import Post, Category
 from datetime import datetime
 
 
+POST_LIMIT = 5
+
+
 def query_posts():
     return Post.objects.select_related(
         'category',
@@ -16,7 +19,7 @@ def query_posts():
 
 
 def index(request):
-    post_list = query_posts()[:5]
+    post_list = query_posts()[:POST_LIMIT]
 
     return render(request, 'blog/index.html', {'post_list': post_list})
 
